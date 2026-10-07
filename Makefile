@@ -18,6 +18,7 @@ $(BUILD)/tests: tests/test_flightdeck.cpp src/flightdeck.cpp include/flightdeck.
 test: $(BUILD)/flightdeck $(BUILD)/tests
 	./$(BUILD)/tests
 	python3 tests/integration.py ./$(BUILD)/flightdeck
+	python3 -m unittest discover -s tests -p test_report.py
 
 sanitize: | $(BUILD)
 	$(CXX) $(CPPFLAGS) -std=c++17 -O1 -g -Wall -Wextra -Wpedantic -Werror -fsanitize=address,undefined -fno-omit-frame-pointer src/flightdeck.cpp tests/test_flightdeck.cpp -o $(BUILD)/tests-sanitize
