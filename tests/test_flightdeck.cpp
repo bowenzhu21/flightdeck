@@ -28,7 +28,12 @@ std::uint32_t length(const std::string& s, std::size_t at) {
 std::string analyze(const std::vector<Event>& events) {
   Config c; c.lateness_ms = 1000;
   std::ostringstream findings; Processor p(c, [&](const Anomaly& a) { write_anomaly(findings, a); });
-  for (auto e : events) p.ingest(e); p.finish(); write_metrics(findings, p.metrics()); return findings.str();
+  for (const auto& event : events) {
+    p.ingest(event);
+  }
+  p.finish();
+  write_metrics(findings, p.metrics());
+  return findings.str();
 }
 void parsing() {
   auto e = parse_csv_line("1,0,alpha-1,0,ground,43.4723,-80.5449,0,100", 2);

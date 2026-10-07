@@ -7,6 +7,8 @@
 
 [Interactive report](https://bowenzhu21.github.io/flightdeck/) · [Architecture](docs/DESIGN.md) · [Binary format](docs/FORMAT.md) · [Raw measurements](docs/benchmark.json)
 
+[![Flightdeck replay report](docs/preview.jpg)](https://bowenzhu21.github.io/flightdeck/)
+
 Flightdeck ingests a streaming vehicle-telemetry CSV, records a checksummed binary log, reorders bounded out-of-order events, and checks each vehicle's state and motion. Replaying the same log restores the original rules and reproduces the same findings. Corrupted logs fail explicitly; prefix salvage can recover intact frames without pretending the mission is complete.
 
 The engineering problem is intentionally concrete: a telemetry source can repeat packets, arrive late, jump its clock, disappear, or report an impossible transition. The tool exposes which packets were dropped, why a finding fired, and what state was retained. It runs locally with no cloud account or paid API.
