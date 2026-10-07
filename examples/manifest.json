@@ -1,0 +1,28 @@
+{
+  "synthetic": true,
+  "seed": 2026,
+  "description": "Six simulated aircraft over 30 seconds. Injected faults are engineering test cases, not operational incidents.",
+  "rows": 721,
+  "vehicles": [
+    "alpha",
+    "bravo",
+    "charlie",
+    "delta",
+    "echo",
+    "foxtrot"
+  ],
+  "faults": [
+    "duplicate sequences",
+    "late telemetry",
+    "arrival clock regression",
+    "device clock ahead",
+    "invalid state transitions",
+    "telemetry blackout",
+    "geofence breach",
+    "velocity spike",
+    "altitude breach",
+    "low battery",
+    "sequence regression",
+    "same-time conflicting positions"
+  ]
+}
