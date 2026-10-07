@@ -32,7 +32,7 @@ make clean
 make test CXX=g++
 ```
 
-No external C++ dependencies. The generated report is a self-contained HTML file with vehicle/rule/text filters and an interactive fault timeline. JSON download links require its sibling JSON files or a simple static server:
+No external C++ dependencies. The generated report is a self-contained HTML file with a scrubbable mission map, vehicle tracks, linked fault markers, vehicle/rule/text filters, and an interactive fault timeline. Positions come from the source CSV, including rejected packets, and remain at the last observation without interpolation. JSON download links require its sibling JSON files or a simple static server:
 
 ```sh
 python3 -m http.server 8080 --directory docs
@@ -114,7 +114,7 @@ Details and tradeoffs are in [DESIGN.md](docs/DESIGN.md).
 ## Verification
 
 ```sh
-make test       # C++ assertions and end-to-end CLI scenarios
+make test       # C++ assertions, end-to-end CLI scenarios, and report provenance checks
 make sanitize   # both suites with AddressSanitizer and UndefinedBehaviorSanitizer
 ```
 
