@@ -312,7 +312,8 @@ std::vector<std::uint8_t> LogReader::next_frame(bool& clean_eof) {
   offset_ += 8 + length; return payload;
 }
 Recovery LogReader::read(const std::function<void(const Event&)>& sink, bool salvage) {
-  if (consumed_) throw std::logic_error("log already consumed"); consumed_ = true;
+  if (consumed_) throw std::logic_error("log already consumed");
+  consumed_ = true;
   Recovery result; result.valid_bytes = offset_;
   for (;;) {
     Bytes payload;

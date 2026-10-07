@@ -16,6 +16,8 @@ The engineering problem is intentionally concrete: a telemetry source can repeat
 Requires a C++17 compiler, Make, and Python 3.10+ for fixtures, integration tests, and the report. Tested locally with Apple Clang 21 on macOS arm64; CI is configured for Clang and GCC on Linux.
 
 ```sh
+git clone https://github.com/bowenzhu21/flightdeck.git
+cd flightdeck
 make test
 make demo
 open docs/index.html        # macOS; open this file in any browser on Linux
