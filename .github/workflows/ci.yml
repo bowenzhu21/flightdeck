@@ -1,0 +1,29 @@
+name: build-test
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        compiler: [clang++, g++]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and test
+        run: make test CXX=${{ matrix.compiler }}
+      - name: Address and undefined behavior sanitizers
+        run: make sanitize CXX=${{ matrix.compiler }}
+      - name: Reproduce synthetic demo
+        run: make demo CXX=${{ matrix.compiler }}
+      - name: Verify identical analysis after replay
+        run: |
+          python3 - <<'PY'
+          import json
+          a = json.load(open('build/record.json'))
+          b = json.load(open('docs/report.json'))
+          assert all(a[k] == b[k] for k in ('config', 'metrics', 'anomalies', 'log'))
+          assert a['metrics']['received'] == 721
+          assert a['metrics']['emitted'] == 706
+          assert a['metrics']['anomalies'] == 46
+          PY
